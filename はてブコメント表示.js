@@ -1,1 +1,1 @@
-javascript:(function(){window.open('http://b.hatena.ne.jp/entry/'+(location.protocol=='https:'?(location.host=='twitter.com')?'':'s/':'')+location.host+location.pathname+location.search)}());
+javascript:(function(){const canonical = document.querySelector("link[rel=canonical]");let name;if (canonical) {name = canonical.href.split("://")[1]} else {name = location.host+location.pathname+location.search};window.open('http://b.hatena.ne.jp/entry/'+(location.protocol=='https:'?(location.host=='twitter.com')?'':'s/':'')+name)}());
