@@ -1,0 +1,1 @@
+javascript:(function(){if(location.href.search(/([B0-9][0-9A-Z]{9})([^0-9A-Z]|$)/)!=-1){location=("https://www.amazon.co.jp/dp/"+RegExp.$1)}}());

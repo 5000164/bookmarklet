@@ -1,0 +1,1 @@
+javascript:(function(){window.open(document.getElementById("MainVideoPlayer").children[0].getAttribute("src"))}());

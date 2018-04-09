@@ -1,0 +1,1 @@
+javascript:(function(){if(location.href.search(/orderID=(D\d{2}-\d{7}-\d{7})/)!=-1){location=("https://www.amazon.co.jp/gp/digital/your-account/order-summary.html?orderID="+RegExp.$1)}}());
