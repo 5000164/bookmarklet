@@ -1,1 +1,1 @@
-javascript:(function(){window.open("https://twitter.com/share?text="+encodeURIComponent(document.title))})()
+javascript:(function(){window.open("https://twitter.com/share?url="+encodeURIComponent(location.href)+"&text="+encodeURIComponent(document.title))})()
