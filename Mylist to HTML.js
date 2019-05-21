@@ -1,1 +1,19 @@
-javascript:(function(){function o(b){var a=window.open().document;a.writeln("<textarea rows=60 cols=80>"+b+"</textarea>");a.close()}var contents="<html>\n<body>\n<ul>\n"+document.body.innerHTML.replace(/^(?!.*\/watch\/(sm.+|nm.+|\d+)).*$/gm,"").replace(/^.*id=\"BTN_playlist_play_all\".*$/gm,"").replace(/^[\n\r]/gm,"").replace(/<wbr>/gm,"").replace(/(.*) data-href=\".*?\"(.*)/gm, "$1$2").replace(/(.*)(href=\".*?)\?.*?(\".*)/gm, "$1$2$3").replace(/(.*href=\")\/watch\/(sm.+|nm.+|\d+)(\".*)/gm, "$1http://www.nicovideo.jp/watch/$2$3").replace(/^<h5>/gm,"  <li>").replace(/<\/h5>$/gm,"</li>")+"</ul>\n</body>\n</html>\n";o(contents);})();
+// ニコニコ動画のマイリストを HTML にする
+
+(() => {
+  const getSongs = (html) => html
+    .replace(/^(?!.*id="SYS_page_items").*$/gm, "") // 動画を含んでいる行だけ取り出す
+    .replace(/class="SYS_box_item MylistItem"/g, "\n") // 動画ごとに行を分ける
+    .replace(/<wbr>/gm, "") // wbt タグが邪魔になるので取り除く
+    .replace(/.*<h5.*?href="\/watch\/(.*?)".*?>(.*?)<.*/g, "$1,$2") // 動画のタイトルとリンクを取り出す
+    .replace(/.*ul.*/g, "") // 必要ない行を削除する
+    .replace(/^[\n\r]/gm, "") // 空行を削除する
+    .split("\n")
+    .filter(v => v.length > 0)
+    .map(v => v.split(","))
+
+  const songs = getSongs(document.body.innerHTML).map(v => `<li><a href="http://www.nicovideo.jp/watch/${v[0]}">${v[1]}</a></li>`).join("\n")
+  const d = window.open().document
+  d.writeln(`<textarea rows=60 cols=80><html>\n<body>\n<ul>\n${songs}\n</ul>\n</body>\n</html>\n</textarea>`)
+  d.close()
+})()
