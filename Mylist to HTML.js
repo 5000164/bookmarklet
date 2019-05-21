@@ -13,7 +13,8 @@
     .map(v => v.split(","))
 
   const songs = getSongs(document.body.innerHTML).map(v => `<li><a href="http://www.nicovideo.jp/watch/${v[0]}">${v[1]}</a></li>`).join("\n")
-  const d = window.open().document
-  d.writeln(`<textarea rows=60 cols=80><html>\n<body>\n<ul>\n${songs}\n</ul>\n</body>\n</html>\n</textarea>`)
-  d.close()
+  const body = window.open().document.getElementsByTagName("body")[0]
+  const pre = document.createElement("pre")
+  pre.textContent = songs
+  body.appendChild(pre)
 })()
